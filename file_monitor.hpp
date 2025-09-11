@@ -68,7 +68,6 @@ constexpr const char* SYSTEM_NAMES[] = {
     "Microsoft - MSX2",
     "Microsoft - Xbox",
     "Microsoft - Xbox 360",
-    "moggie.sh",
     "MrBoom",
     "NEC - PC-8001 - PC-8801",
     "NEC - PC-98",
