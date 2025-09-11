@@ -1,7 +1,7 @@
 # Makefile
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall
-TARGET = file_monitor
+TARGET = retrotool
 IMGUI_DIR = imgui
 SOURCES = main.cpp file_monitor.cpp \
 			$(IMGUI_DIR)/imgui.cpp \
