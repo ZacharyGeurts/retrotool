@@ -11,7 +11,7 @@ File monitor is written obtuse. Just ask an AI to write your window hpp and cpp.
 file_monitor->renderUI(); is the call to open a new window in main.cpp.
 You can reference this file_monitor.cpp.
 paste file_monitor.cpp
-I want blah blah blah`
+I want blah blah blah`<BR />
 <BR />
 `git clone https://github.com/ZacharyGeurts/retrotool`<BR />
 `cd retrotool`<BR />
