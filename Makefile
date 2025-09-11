@@ -3,7 +3,7 @@ CXX = g++
 CXXFLAGS = -std=c++17 -Wall
 TARGET = file_monitor
 IMGUI_DIR = imgui
-SOURCES = file_monitor.cpp \
+SOURCES = main.cpp file_monitor.cpp \
 			$(IMGUI_DIR)/imgui.cpp \
 			$(IMGUI_DIR)/imgui_draw.cpp \
 			$(IMGUI_DIR)/imgui_widgets.cpp \
@@ -11,7 +11,7 @@ SOURCES = file_monitor.cpp \
 			$(IMGUI_DIR)/backends/imgui_impl_sdl3.cpp \
 			$(IMGUI_DIR)/backends/imgui_impl_sdlrenderer3.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
-HEADERS = file_monitor.hpp $(IMGUI_DIR)/imgui.h $(IMGUI_DIR)/backends/imgui_impl_sdl3.h $(IMGUI_DIR)/backends/imgui_impl_sdlrenderer3.h
+HEADERS = main.hpp file_monitor.hpp $(IMGUI_DIR)/imgui.h $(IMGUI_DIR)/backends/imgui_impl_sdl3.h $(IMGUI_DIR)/backends/imgui_impl_sdlrenderer3.h
 
 # SDL3
 SDL_CFLAGS = $(shell pkg-config --cflags sdl3)
