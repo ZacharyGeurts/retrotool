@@ -1,6 +1,5 @@
 #include "main.hpp"
 #include "file_monitor.hpp"
-#include "imgui/imgui.h"
 #include "imgui/backends/imgui_impl_sdl3.h"
 #include "imgui/backends/imgui_impl_sdlrenderer3.h"
 #include <filesystem>
