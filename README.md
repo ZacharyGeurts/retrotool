@@ -1,7 +1,6 @@
 # retrotool
 wip retroarch screenshot capture tool. I will announce 1.0<BR />
 Modular. Main and main.hpp are excellent starters if you want to use SDL3 and Dear imgui.<BR />
-![dear imgui manual](https://gitpod.io/#https://github.com/pthom/imgui_manual)<BR />
 ![image](https://github.com/ZacharyGeurts/retrotool/blob/main/Screenshot%20from%202025-09-11%2012-59-40.png)<BR />
 I am working on a Grok3 module.<BR />
 Just add your hpp (and remove mine?)<BR />
