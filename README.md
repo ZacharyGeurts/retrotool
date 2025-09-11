@@ -6,6 +6,12 @@ I am working on a Grok3 module.<BR />
 Just add your hpp (and remove mine?)<BR />
 My module sleeps for 3 or 5 seconds so it is less responsive than normal.<BR />
 See Lines 2, 17, and 50 in main.cpp to see how easy to start.<BR />
+File monitor is written obtuse. Just ask an AI to write your window hpp and cpp.<BR />
+`Write me a window for Dear imgui. I have main.cpp and main.h that handles all the setup with SDL3 and imgui.
+file_monitor->renderUI(); is the call to open a new window in main.cpp.
+You can reference this file_monitor.cpp.
+paste file_monitor.cpp
+I want blah blah blah`
 <BR />
 `git clone https://github.com/ZacharyGeurts/retrotool`<BR />
 `cd retrotool`<BR />
