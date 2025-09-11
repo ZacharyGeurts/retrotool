@@ -62,7 +62,7 @@ int Application::run() {
     file_monitor->start();
     while (running) {
         renderUI();
-        std::this_thread::sleep_for(std::chrono::milliseconds(16));
+        std::this_thread::sleep_for(std::chrono::milliseconds(16)); // ~60fps
     }
     file_monitor->stop();
     return 0;
