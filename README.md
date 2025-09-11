@@ -17,5 +17,6 @@ I want blah blah blah`<BR />
 `cd retrotool`<BR />
 `git clone https://github.com/ocornut/imgui`<BR />
 `make`<BR />
+`./retrotool`<BR />
 <BR />
 Requires SDL3.
