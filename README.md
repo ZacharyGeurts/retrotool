@@ -3,7 +3,7 @@ wip retroarch screenshot capture tool. I will announce 1.0<BR />
 Modular. Main and main.hpp are excellent starters if you want to use SDL3 and Dear imgui.<BR />
 I am working on a module.<BR />
 Just add your hpp (and remove mine?)<BR />
-See Lines 17 and 50 in main.cpp to see how easy to start.<BR />
+See Lines 2, 17, and 50 in main.cpp to see how easy to start.<BR />
 <BR />
 `git clone https://github.com/ZacharyGeurts/retrotool`<BR />
 `cd retrotool`<BR />
