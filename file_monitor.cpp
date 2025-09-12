@@ -22,21 +22,39 @@ void FileMonitor::initSystems() {
 
 void FileMonitor::copyAndMoveFile(const fs::path& src, const fs::path& dest) {
     std::string filename = src.filename().string();
-    size_t ext_pos = filename.rfind(".png");
+    std::string extension = src.extension().string(); // Get the file extension (e.g., ".png")
+    size_t ext_pos = filename.rfind(extension); // Find the position of the extension
     if (ext_pos != std::string::npos) {
-        size_t dash_pos = filename.rfind("--", ext_pos);
-        if (dash_pos != std::string::npos)
-            filename = filename.substr(0, dash_pos) + ".png";
+        // Find the last dash before the extension
+        size_t last_dash_pos = filename.rfind("-", ext_pos - 1);
+        if (last_dash_pos != std::string::npos) {
+            // Keep everything before the last dash and append the extension
+            filename = filename.substr(0, last_dash_pos) + extension;
+        }
     }
-    fs::path final_dest = dest / filename;
-    fs::path thumb_dest = dest.parent_path().parent_path() / "thumbnails" / filename;
-    if (!fs::exists(thumb_dest.parent_path())) fs::create_directories(thumb_dest.parent_path());
+	ext_pos = filename.rfind(extension); // Find the position of the extension
+    if (ext_pos != std::string::npos) {
+        // Find the last dash before the extension
+        size_t last_dash_pos = filename.rfind("-", ext_pos - 1);
+        if (last_dash_pos != std::string::npos) {
+            // Keep everything before the last dash and append the extension
+            filename = filename.substr(0, last_dash_pos) + extension;
+        }
+    }
+    // Determine the destination subfolder based on use_named_titles
+    std::string subfolder = pimpl->use_named_titles ? "Named_Titles" : "Named_Snaps";
+    fs::path final_dest = dest / subfolder / filename;
+
+    // Create the destination directory if it doesn't exist
+    if (!fs::exists(final_dest.parent_path())) {
+        fs::create_directories(final_dest.parent_path());
+    }
+
     try {
-        fs::copy_file(src, thumb_dest, fs::copy_options::overwrite_existing);
         fs::rename(src, final_dest);
         std::lock_guard<std::mutex> lock(mutex);
-        copied_files.push_back(filename + " to " + pimpl->systems[pimpl->selected_system] + "/" + (pimpl->use_named_titles ? "Named_Titles" : "Named_Snaps"));
-        pimpl->use_named_titles = !pimpl->use_named_titles;
+        copied_files.push_back(filename + " to " + pimpl->systems[pimpl->selected_system] + "/" + subfolder);
+        pimpl->use_named_titles = !pimpl->use_named_titles; // Toggle for next file
     } catch (const fs::filesystem_error& e) {
         pimpl->error_message = "Error processing " + filename + ": " + e.what();
     }
@@ -46,26 +64,24 @@ void FileMonitor::monitorFiles() {
     while (running) {
         fs::path src, dest_base;
         std::string sys;
-        bool use_titles;
         {
             std::lock_guard<std::mutex> lock(mutex);
             src = source_dir;
             dest_base = dest_dir;
             sys = pimpl->systems[pimpl->selected_system];
-            use_titles = pimpl->use_named_titles;
         }
         if (!fs::is_directory(src)) {
             pimpl->error_message = "Invalid source: " + src.string();
             std::this_thread::sleep_for(std::chrono::seconds(5));
             continue;
         }
-        fs::path sub_dir = use_titles ? "Named_Titles" : "Named_Snaps";
-        fs::path dest = dest_base / sys / sub_dir;
+        fs::path dest = dest_base / sys; // Remove sub_dir here
         if (!fs::exists(dest)) fs::create_directories(dest);
         try {
             for (const auto& entry : fs::directory_iterator(src)) {
-                if (fs::is_regular_file(entry) && !fs::exists(dest / entry.path().filename()))
+                if (fs::is_regular_file(entry) && !fs::exists(dest / (pimpl->use_named_titles ? "Named_Titles" : "Named_Snaps") / entry.path().filename())) {
                     copyAndMoveFile(entry.path(), dest);
+                }
             }
         } catch (const fs::filesystem_error& e) {
             pimpl->error_message = "Filesystem error: " + std::string(e.what());

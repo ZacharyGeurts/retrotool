@@ -6,7 +6,7 @@
 
 Application::Application() : window(nullptr), renderer(nullptr), running(false) {
     file_monitor = std::make_unique<FileMonitor>("/mnt/ffdf60e6-db3c-45e1-a454-8897263729af/Screenshots",
-                                                "/mnt/ffdf60e6-db3c-45e1-a454-8897263729af");
+                                                "/mnt/ffdf60e6-db3c-45e1-a454-8897263729af/thumbnails");
 }
 
 Application::~Application() { cleanupSDL(); }
